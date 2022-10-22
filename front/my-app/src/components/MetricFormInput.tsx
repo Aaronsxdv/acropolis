@@ -12,9 +12,6 @@ import CreatableSelect, {
 } from "react-select";
 import FormProgressBar from "./FormProgressBar";
 import { NextStepButton } from "./common";
-type Props = {
-  onChange?: () => void;
-};
 
 export const CustomSelect = styled(CreatableSelect)`
   width: 150px;
@@ -144,8 +141,11 @@ const StyledFormHeader = styled.p`
   color: #484848;
   margin-left: 35px;
 `;
+type Props = {
+  nextPage: () => void;
+};
 
-const MetricFormInput: FC<Props> = () => {
+const MetricFormInput: FC<Props> = (props) => {
   const [windSpeed, setWindSpeed] = useState<string>("");
   const [temperature, setTemperature] = useState<string>("");
   const [airPressure, setAirPressure] = useState<string>("");
@@ -534,7 +534,8 @@ const MetricFormInput: FC<Props> = () => {
           </div>
         </StyledInputContainer>
       </div>
-      <NextStepButton>Next Step</NextStepButton>
+
+      <NextStepButton onClick={props.nextPage}>Next Step</NextStepButton>
     </StyledFormContainer>
   );
 };

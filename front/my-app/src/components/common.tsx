@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const NextStepButton = styled.div`
+  cursor: pointer;
   padding: 10px 24px;
   width: 107px;
   height: 40px;
@@ -15,7 +16,8 @@ export const NextStepButton = styled.div`
   font-weight: 500;
   font-size: 21.6179px;
   margin-left: auto;
-  margin-right: 0;
+  margin-top: 11px;
+  margin-right: 50px;
   &:hover {
     box-shadow: 2px 1px 1px 0px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 2px 1px 1px 0px rgba(0, 0, 0, 0.3);
