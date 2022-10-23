@@ -7,7 +7,7 @@ import MessageForm from "./components/MessageForm";
 import AlertList from "./components/AlertList";
 //<MetricFormInput />
 function App() {
-  const [page, setPage] = useState(5);
+  const [page, setPage] = useState(1);
   const nextPage = () => {
     console.log("FFFFF");
     setPage((page) => page + 1);
@@ -17,7 +17,7 @@ function App() {
       {page === 1 && <MetricFormInput nextPage={nextPage} />}
       {page === 2 && <LocationForm nextPage={nextPage} />}
       {page === 3 && <NotificationForm nextPage={nextPage} />}
-      {page === 4 && <MessageForm />}
+      {page === 4 && <MessageForm nextPage={nextPage} />}
       {page === 5 && <AlertList />}
     </div>
   );

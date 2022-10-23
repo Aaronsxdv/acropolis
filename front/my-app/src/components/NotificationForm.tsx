@@ -150,6 +150,8 @@ const options = [
 ];
 
 const NotificationForm: FC<Props> = (props) => {
+  const [url, setUrl] = useState("");
+  const [email, setEmail] = useState("");
   return (
     <StyledFormContainer>
       <FormProgressBar activePage={3} />
@@ -176,9 +178,10 @@ const NotificationForm: FC<Props> = (props) => {
         <StyledTextFieldContainer>
           <StyledTextField
             id="standard-basic"
-            type="number"
-            value={""}
-            onChange={() => {}}
+            value={url}
+            onChange={(event) => {
+              setUrl(event.target.value);
+            }}
           />
           <StyledLabel>URL</StyledLabel>
         </StyledTextFieldContainer>
@@ -207,9 +210,10 @@ const NotificationForm: FC<Props> = (props) => {
         <StyledTextFieldContainer>
           <StyledTextField
             id="standard-basic"
-            type="number"
-            value={""}
-            onChange={() => {}}
+            value={email}
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
           />
           <StyledLabel>email</StyledLabel>
         </StyledTextFieldContainer>

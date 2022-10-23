@@ -197,17 +197,19 @@ const RadioButtonContainer = styled.div`
   margin: auto 30px;
 `;
 const options = [
+  { value: "1 hour", label: "1 hour" },
+  { value: "2 hours", label: "2 hours" },
+  { value: "6 hours", label: "6 hours" },
+  { value: "8 hours", label: "8 hours" },
+  { value: "12 hours", label: "12 hours" },
+  { value: "24 hours", label: "24 hours" },
+  { value: "2 days", label: "2 days" },
   { value: "3 days", label: "3 days" },
-  { value: "7 days", label: "7 days" },
-  { value: "14 days", label: "14 days" },
-  { value: "21 days", label: "21 days" },
-  { value: "1 month", label: "1 month" },
-  { value: "3 months", label: "3 months" },
 ];
 
 const LocationForm: FC<Props> = (props) => {
   const [coordinates, setCoordinates] = useState("");
-  const [radius, setRadius] = useState(0);
+  const [radius, setRadius] = useState("");
   const [time, setTime] = useState("Future");
   useEffect(() => {
     const map = new mapboxgl.Map({
@@ -251,8 +253,10 @@ const LocationForm: FC<Props> = (props) => {
             <StyledTextField
               id="standard-basic"
               type="number"
-              value={""}
-              onChange={(event) => {}}
+              value={radius}
+              onChange={(event) => {
+                setRadius(event.target.value);
+              }}
             />
             <StyledLabel>Radius</StyledLabel>
           </StyledTextFieldContainer>

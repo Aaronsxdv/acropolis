@@ -1,12 +1,56 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import FormProgressBar from "./FormProgressBar";
 import { NextStepButton } from "./common";
 import DeleteIcon from "../svg/DeleteIcon";
 import AccountIcon from "../svg/AccountIcon";
+import Alert from "./Alert";
+
+type Rule = {
+  title: string;
+  logical_operator: string;
+  metric: string;
+  value: number;
+  id: number;
+  alert_triggers: [object];
+  alert_definitions: [object];
+};
 
 const NotificationForm: FC = (props) => {
+  const [rules, setRules] = useState<Rule[]>();
+
+  const timeStamps = ["", "19:37      27/09/2022", "", "", "", ""];
+  const locations = [
+    "",
+    "Nové mesto",
+    "Staré mesto",
+    "Bratislava region",
+    "Bratislava region",
+  ];
+  useEffect(() => {
+    fetch("https://mighty-clowns-jump-176-10-40-249.loca.lt/monitoring-rules", {
+      method: "GET",
+      mode: "cors",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const temp = data.map((element: Rule) => {
+          return {
+            id: element.id,
+            title: element.title,
+            logical_operator: element.logical_operator,
+            metric: element.metric,
+            value: element.value,
+            alert_triggers: element.alert_triggers.length,
+            alert_definitions: element.alert_definitions.length,
+          };
+        });
+        console.log(temp);
+        setRules(temp);
+      });
+  }, []);
+
   return (
     <>
       <div
@@ -24,10 +68,12 @@ const NotificationForm: FC = (props) => {
             width: "339px",
             height: "50px",
             backgroundColor: "#EEE8F4",
-
+            textAlign: "center",
             margin: "auto 0",
           }}
-        ></div>
+        >
+          Acropolis
+        </div>
         <div
           style={{
             width: "339px",
@@ -154,6 +200,21 @@ const NotificationForm: FC = (props) => {
             Trends/Patterns
           </p>
         </div>
+      </div>
+      <div style={{ width: "100%", margin: "auto" }}>
+        {rules?.map((element) => (
+          <Alert
+            id={element.id}
+            title={element.title}
+            logical_operator={element.logical_operator}
+            metric={element.metric}
+            value={element.value}
+            alert_triggers={element.alert_triggers}
+            alert_definitions={element.alert_definitions}
+            timeStamp={timeStamps[element.id]}
+            location={locations[element.id]}
+          />
+        ))}
       </div>
     </>
   );

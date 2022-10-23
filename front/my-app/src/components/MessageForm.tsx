@@ -5,7 +5,7 @@ import FormProgressBar from "./FormProgressBar";
 import { NextStepButton } from "./common";
 import EditIcon from "../svg/EditIcon";
 type Props = {
-  onChange?: () => void;
+  nextPage: () => void;
 };
 
 const StyledFormContainer = styled.div`
@@ -23,7 +23,7 @@ const StyledFormHeader = styled.p`
   margin-left: 35px;
 `;
 
-const MessageForm: FC<Props> = () => {
+const MessageForm: FC<Props> = (props) => {
   return (
     <StyledFormContainer>
       <FormProgressBar activePage={4} />
@@ -102,7 +102,7 @@ const MessageForm: FC<Props> = () => {
         <EditIcon />
         <p style={{ textAlign: "left", margin: "auto 0px" }}>Edit message</p>
       </button>
-      <NextStepButton>Finish</NextStepButton>
+      <NextStepButton onClick={props.nextPage}>Finish</NextStepButton>
     </StyledFormContainer>
   );
 };

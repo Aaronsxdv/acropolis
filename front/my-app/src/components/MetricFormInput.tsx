@@ -12,6 +12,7 @@ import CreatableSelect, {
 } from "react-select";
 import FormProgressBar from "./FormProgressBar";
 import { NextStepButton } from "./common";
+import MetricIcon from "../svg/MetricIcon";
 
 export const CustomSelect = styled(CreatableSelect)`
   width: 150px;
@@ -153,7 +154,6 @@ const MetricFormInput: FC<Props> = (props) => {
   const [temperatureOpen, setTemperatureOpen] = useState<boolean>(false);
   const [windSpeedOpen, setWindSpeedOpen] = useState<boolean>(false);
   const options = [
-    { value: "equals", label: "equals" },
     { value: "greater than", label: "greater than" },
     { value: "lower than", label: "lower than" },
     { value: "greater than or equal to", label: "greater than or equal to" },
@@ -179,10 +179,10 @@ const MetricFormInput: FC<Props> = (props) => {
             setTemperatureOpen(!temperatureOpen);
           }}
         >
-          <StyledConditionCheckbox type={"checkbox"} />
+          <MetricIcon metric={"PRECIPITATION"} />
           <label style={{ margin: "auto 0" }}>
-            <p style={{ margin: "auto 0" }}>Temperature</p>
-            <p style={{ margin: "auto 0" }}>Supporting text</p>
+            <p style={{ margin: "auto 0" }}>Precipitation</p>
+            <p style={{ margin: "auto 0" }}>mm/h</p>
           </label>
         </div>
         <StyledInputContainer isVisible={temperatureOpen}>
@@ -195,7 +195,7 @@ const MetricFormInput: FC<Props> = (props) => {
               color: "#484848",
             }}
           >
-            temperature is
+            Precipitation is
           </p>
           <CustomSelect
             inputId="clickableInput"
@@ -212,7 +212,7 @@ const MetricFormInput: FC<Props> = (props) => {
                 setTemperature(event.target.value);
               }}
             />
-            <StyledLabel>min. temp</StyledLabel>
+            <StyledLabel>value</StyledLabel>
           </StyledTextFieldContainer>
           <div>
             <div
@@ -235,7 +235,7 @@ const MetricFormInput: FC<Props> = (props) => {
                     lineHeight: "24px",
                   }}
                 >
-                  average temperature
+                  Average Precipitation
                 </p>
                 <p
                   style={{
@@ -269,7 +269,7 @@ const MetricFormInput: FC<Props> = (props) => {
                     lineHeight: "24px",
                   }}
                 >
-                  peak temperature
+                  Peak Precipitation
                 </p>
                 <p
                   style={{
@@ -286,7 +286,6 @@ const MetricFormInput: FC<Props> = (props) => {
           </div>
         </StyledInputContainer>
       </div>
-
       <div
         style={{ alignItems: "baseline", margin: "auto", marginBottom: "20px" }}
       >
@@ -303,13 +302,138 @@ const MetricFormInput: FC<Props> = (props) => {
             setWindSpeedOpen(!windSpeedOpen);
           }}
         >
-          <StyledConditionCheckbox type={"checkbox"} />
+          <MetricIcon metric={"HUMIDITY"} />
           <label style={{ margin: "auto 0" }}>
-            <p style={{ margin: "auto 0" }}>Wind speed</p>
-            <p style={{ margin: "auto 0" }}>Supporting text</p>
+            <p style={{ margin: "auto 0" }}>Relative humidity</p>
+            <p style={{ margin: "auto 0" }}>%</p>
           </label>
         </div>
         <StyledInputContainer isVisible={windSpeedOpen}>
+          <p
+            style={{
+              margin: "auto 0",
+              fontWeight: 400,
+              fontSize: "24px",
+              lineHeight: "28px",
+              color: "#484848",
+            }}
+          >
+            Humidity is
+          </p>
+          <CustomSelect
+            inputId="clickableInput"
+            classNamePrefix="Select"
+            className="tag-select"
+            options={options}
+          />
+          <StyledTextFieldContainer>
+            <StyledTextField
+              id="standard-basic"
+              type="number"
+              value={windSpeed}
+              onChange={(event) => {
+                setWindSpeed(event.target.value);
+              }}
+            />
+            <StyledLabel>value</StyledLabel>
+          </StyledTextFieldContainer>
+          <div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                width: "275px",
+                height: "70px",
+                backgroundColor: "#f7f2f9",
+                marginBottom: "10px",
+                marginLeft: "35px",
+              }}
+            >
+              <StyledConditionCheckbox type={"checkbox"} />
+              <label style={{ margin: "auto 0" }}>
+                <p
+                  style={{
+                    margin: "auto 0",
+                    fontSize: "14px",
+                    letterSpacing: "0.5px",
+                    lineHeight: "24px",
+                  }}
+                >
+                  Average Humidity
+                </p>
+                <p
+                  style={{
+                    margin: "auto 0",
+                    fontSize: "12px",
+                    letterSpacing: "0.25px",
+                    lineHeight: "20px",
+                  }}
+                >
+                  timewindow in the next step
+                </p>
+              </label>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                width: "275px",
+                height: "70px",
+                backgroundColor: "#f7f2f9",
+                marginLeft: "35px",
+              }}
+            >
+              <StyledConditionCheckbox type={"checkbox"} />
+              <label style={{ margin: "auto 0" }}>
+                <p
+                  style={{
+                    margin: "auto 0",
+                    fontSize: "14px",
+                    letterSpacing: "0.5px",
+                    lineHeight: "24px",
+                  }}
+                >
+                  Peak Humidity
+                </p>
+                <p
+                  style={{
+                    margin: "auto 0",
+                    fontSize: "12px",
+                    letterSpacing: "0.25px",
+                    lineHeight: "20px",
+                  }}
+                >
+                  anomaly
+                </p>
+              </label>
+            </div>
+          </div>
+        </StyledInputContainer>
+      </div>
+      <div
+        style={{ alignItems: "baseline", margin: "auto", marginBottom: "20px" }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            width: "900px",
+            height: "70px",
+            backgroundColor: "#f7f2f9",
+            marginBottom: "10px",
+          }}
+          onClick={() => {
+            setWindSpeedOpen(!windSpeedOpen);
+          }}
+        >
+          <MetricIcon metric={"WIND"} />
+          <label style={{ margin: "auto 0" }}>
+            <p style={{ margin: "auto 0" }}>Wind speed</p>
+            <p style={{ margin: "auto 0" }}>m/s</p>
+          </label>
+        </div>
+        <StyledInputContainer isVisible={false}>
           <p
             style={{
               margin: "auto 0",
@@ -427,10 +551,10 @@ const MetricFormInput: FC<Props> = (props) => {
             setAirPressureOpen(!airPressureOpen);
           }}
         >
-          <StyledConditionCheckbox type={"checkbox"} />
+          <MetricIcon metric={"TEMPERATURE"} />
           <label style={{ margin: "auto 0" }}>
-            <p style={{ margin: "auto 0" }}>Air pressure</p>
-            <p style={{ margin: "auto 0" }}>Supporting text</p>
+            <p style={{ margin: "auto 0" }}>Temperature</p>
+            <p style={{ margin: "auto 0" }}>°C</p>
           </label>
         </div>
         <StyledInputContainer isVisible={airPressureOpen}>
